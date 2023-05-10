@@ -20,4 +20,8 @@ module ApplicationHelper
       class: "btn #{css_class}"
     )
   end
+
+  def weather_presenter
+    @weather_presenter ||= WeatherPresenter.new
+  end
 end
