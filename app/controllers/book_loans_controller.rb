@@ -5,6 +5,7 @@ class BookLoansController < ApplicationController
   def create
     respond_to do |format|
       if @book_loan.save
+        notice_calendar
         format.html { redirect_to book_url(book), notice: flash_notice }
         format.json { render :show, status: :created, location: @book_loan }
       else
@@ -37,5 +38,9 @@ class BookLoansController < ApplicationController
 
   def book_loan_params
     params.require(:book_id)
+  end
+
+  def notice_calendar
+    UserCalendarNotifier.new(current_user, book).insert_event
   end
 end
