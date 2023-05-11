@@ -1,46 +1,26 @@
-require 'google/apis/calendar_v3'
-require 'google/api_client/client_secrets'
-
 class UserCalendarNotifier
+  include GoogleCalendarClient
+
   CALENDAR_ID = 'primary'.freeze
 
-  def initialize(user, book)
+  def initialize(user, book_loan)
     @user = user
-    @book = book
+    @book_loan = book_loan
   end
 
   def insert_event
     return unless user.token.present? && user.refresh_token.present?
-    
-    google_calendar_client.insert_event(CALENDAR_ID, event_data)
+
+    event = google_calendar_client.insert_event(CALENDAR_ID, event_data)
+    set_event_id_in_book_loan(event.id) if event.present?
   end
 
   private
-  
-  attr_reader :user, :book
 
-  def google_calendar_client
-    client = Google::Apis::CalendarV3::CalendarService.new
+  attr_reader :user, :book_loan
 
-    begin
-      client.authorization = secrets.to_authorization
-      client.authorization.grant_type = 'refresh_token'
-    rescue StandardError => e
-      Rails.logger.debug e.message
-    end
-
-    client
-  end
-
-  def secrets
-    Google::APIClient::ClientSecrets.new({
-                                           'web' => {
-                                             'access_token' => user.token,
-                                             'refresh_token' => user.refresh_token,
-                                             'client_id' => A9n.google_client_id,
-                                             'client_secret' => A9n.google_client_secret
-                                           }
-                                         })
+  def set_event_id_in_book_loan(event_id)
+    book_loan.update(calendar_event_id: event_id)
   end
 
   def event_data
@@ -58,5 +38,9 @@ class UserCalendarNotifier
 
   def two_week_from_now
     @two_week_from_now ||= Time.zone.now + 2.weeks
+  end
+
+  def book
+    @book ||= book_loan.book
   end
 end
