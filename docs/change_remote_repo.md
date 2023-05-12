@@ -3,6 +3,7 @@
 ## Tło
 
 Jeżeli na warsztatach **sklonowałeś/aś** repo https://github.com/infakt/workshops_2023_basic_app i teraz chcesz móc pushować do prywatnego - **ta instrukcja jest dla Ciebie!**
+Na końcu znajdziesz też sekcję 'troubleshooting', czyli co może się wydarzyć i jak temu podołać!
 
 Wytłumaczenie:
 
@@ -52,3 +53,40 @@ origin	git@github.com:Dellilah/workshops_2023_basic_app.git (push)
 ```
 
 9. Sprawdź czy możesz wypushować swoje zmiany, do swojego repo!
+
+## Troubleshooting
+
+### Problem z branchem MAIN
+Ze względu na to, że lokalnie rozwijałeś/łaś już apkę z brancha main z dnia 10.05, a między czasie trochę go wzbogaciliśmy o instrukcje... może się to nieco rozjechać.
+
+**Jak sobie poradzić?**
+1. Zróbmy backup Twojego obecnego maina
+```
+git checkout main
+git checkout -b backup
+git checkout main
+```
+2. Wycofajmy się "na twardo" jakiś czas...
+```
+git reset --hard HEAD~5
+```
+3. Teraz na wszelki wypadek - usuńmy powiązanie z remote'm infaktu (dodamy go później z powrotem :) )
+```
+git remote rm infakt
+```
+4. Pobierzmy sobie aktualny main
+```
+git pull
+```
+5. Zmieńmy cokolwiek w README, commit i push!
+```
+git push
+```
+6. Jeżeli zadzialało - jesteśmy w domu:) przywroćmy infakt
+```
+git remote add infakt https://github.com/infakt/workshops_2023_basic_app.git
+```
+7. Na koniec tylko sprawdzmy czy nie ma różnicy między naszym backupem a mainem (poza dodanym w punkcie 5. wpisem w readme)
+```
+git diff backup
+```
