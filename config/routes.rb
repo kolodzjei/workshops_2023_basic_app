@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   resources :books
   resources :publishers
@@ -19,4 +21,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'books#index'
   get '/book-requests', to: 'book_requests#index', as: 'book_requests'
+
+  mount Sidekiq::Web => '/sidekiq'
 end
