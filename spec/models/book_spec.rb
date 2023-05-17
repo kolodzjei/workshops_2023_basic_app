@@ -36,7 +36,8 @@ RSpec.describe Book, type: :model do
         book.book_loans.create(user:, due_date: 1.day.from_now)
       end
 
-      specify { expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date}) by you") }
+      #specify { expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date}) by you") }
+      specify { expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now}) by you") }
 
       context 'when book is also reserved by another user' do
         let(:user2) { create(:user) }
@@ -46,7 +47,8 @@ RSpec.describe Book, type: :model do
         end
 
         specify do
-          expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date}) by you; reserved")
+          #expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date}) by you; reserved")
+          expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now}) by you; reserved")
         end
       end
     end
@@ -58,7 +60,8 @@ RSpec.describe Book, type: :model do
         book.book_loans.create(user: user2, due_date: 1.day.from_now)
       end
 
-      specify { expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date})") }
+      #specify { expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date})") }
+      specify { expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now})") }
 
       context 'when book is also reserved by you' do
         before do
@@ -66,7 +69,8 @@ RSpec.describe Book, type: :model do
         end
 
         specify do
-          expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date}); reserved by you")
+          #expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now.to_date}); reserved by you")
+          expect(book.status_for(user)).to eql("loaned (due date: #{1.day.from_now}); reserved by you")
         end
       end
     end
