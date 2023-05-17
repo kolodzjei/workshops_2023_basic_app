@@ -17,6 +17,7 @@ class CalendarEventRemover
       Rails.logger.debug e.message
     end
   end
+
   private
 
   attr_reader :user, :event_id

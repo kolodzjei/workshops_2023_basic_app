@@ -2,7 +2,6 @@ require 'google/apis/calendar_v3'
 require 'google/api_client/client_secrets'
 
 module GoogleCalendarClient
-
   private
 
   def google_calendar_client

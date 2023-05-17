@@ -94,3 +94,5 @@ gem 'omniauth-google-oauth2', '~> 1.1'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
 gem 'google-api-client', require: 'google/apis/calendar_v3'
+
+gem 'sidekiq', '~> 7.1'

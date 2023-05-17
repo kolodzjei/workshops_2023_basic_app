@@ -13,6 +13,9 @@ module Workshops2023BasicApp
     
     A9n.root = File.expand_path('..', __dir__)
     A9n.load
+
+    config.time_zone = 'Warsaw'
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
