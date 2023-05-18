@@ -97,4 +97,6 @@ gem 'google-api-client', require: 'google/apis/calendar_v3'
 
 gem 'sidekiq', '~> 7.1'
 
-gem "sidekiq-cron", "~> 1.10"
+gem 'sidekiq-cron', '~> 1.10'
+
+gem 'bunny', '~> 2.20'
