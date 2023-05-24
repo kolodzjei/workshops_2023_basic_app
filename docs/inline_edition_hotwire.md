@@ -102,7 +102,7 @@ Ten sam formularz używamy na widoku edycji i dodawania książki.
 ...jeżeli teraz wejdziecie w dodawnie książki, to widok się nie załaduje - booo `book_path(book)` potrzebuje ID, a przy dodwaniu nowej ksiazki jeszcze do nie ma
 Zabezpieczmy to przy pomocy warunku:
 ```ruby
-<%= link_to 'Cancel', book_path(book) if book %>
+<%= link_to 'Cancel', book_path(book) if book.persisted? %>
 ```
 
 3. SAVE
@@ -127,7 +127,7 @@ Znowu, tak jak cancel - musi być koło inputa, więc na widoku `app/views/books
   <div class="form-group">
     <%= form.label :page_count %>
     <%= form.number_field :page_count, class: 'form-control' %>
-    <%= link_to 'Cancel', book_path(book) %>
+    <%= link_to 'Cancel', book_path(book) if book.persisted? %>
     <%= form.button 'Save' %>
   </div>
 <% end %>
