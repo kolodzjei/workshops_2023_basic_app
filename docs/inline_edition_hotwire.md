@@ -5,7 +5,7 @@
 Chcemy, żeby bez przeładowania strony użytkownik mógł zmienić ilość stron w książce, na jej podglądzie.
 UWAGA! zadanie zakłada przejście [poprzedniego](https://github.com/infakt/workshops_2023_basic_app/pull/31/files?short_path=2a48237#diff-2a48237ae080365745b1b88d04dc12673515ba2cb16377dcd13df82d795033a5)
 A przynajmniej:
-* dodanie gema
+* dodanie gema 'hotwire-rails'
 * instalację
 * poprawkę zw. z Popperem
 
@@ -29,7 +29,7 @@ A przynajmniej:
   <div class="book-info mb-4">
     <div class="book-info-label">Pages:</div>
     #...
-<%= end %>
+<% end %>
 ```
 
 3. Sprawdźmy jak to wygląda teraz na widoku książki. Sprawdzając HTML wokół ilości stron, powinniśmy zobaczyć:
@@ -69,7 +69,7 @@ Więc nie umie tego na nic 'zamienić'
 7. Sprawdzamy teraz jak to działa. Wejdź w podgląd książki i kliknij edit...
 **Brawo! Powinna ilość stron przeładować się element edycji**
 
-## Etap 1 - Przeładowanie fragmentu "ilości stron", a pomocą linku i turbo-frame
+## Etap 2 - Zapis/cancel wartości z inline edition
 
 1. Niby fajnie, ale naszego "formularza" inline'owego... nie da się zapisać :D
 Dzieje się tak dlatego, z dwóch powodów:
@@ -80,6 +80,7 @@ Pamiętajmy, ważną zasadę. Jeżeli coś (np link) jest wewnątrz frame-a - je
 Zacznijmy więc od CANCEL
 
 2. CANCEL
+
 CANCEL chcemy mieć tam, gdzie jest pole edycji, więc musimy dodać je w `app/views/books/_form.html.erb`
 ```ruby
 <%= turbo_frame_tag dom_id(book, 'page_count') do %>
@@ -105,9 +106,11 @@ Zabezpieczmy to przy pomocy warunku:
 ```
 
 3. SAVE
+
+
 ...Z tym nie będzie juz tak łatwo. Dlaczego? Bo jak w tym naszym trybie inline edition sprawdzimy HTML-a, to owszem - mamy input field. Ale nie mamy formularza wokół!
 A formularz jest potrzebny, żeby móc wysłać dane do kontrolera.
-Obudujmy więc odpowiednio nasz widok, w `shot.html.erb`:
+Obudujmy więc odpowiednio nasz widok, w `show.html.erb`:
 ```ruby
 <%= form_with(model: @book, data: { turbo_frame: dom_id(@book, 'page_count') }) do |form| %>
   <%= turbo_frame_tag dom_id(@book, 'page_count') do %>
@@ -157,11 +160,11 @@ pierwsza klasa - schowa przyciski, druga - pokaże je, jeżeli na stronie jest k
 2. Dodajmy te klasy do naszych przycisków - cancel i save
 W `app/views/books/_form.html.erb`:
 ```ruby
-  <%= link_to 'Cancel', book_path(book), class: 'inline-action' %>
+  <%= link_to 'Cancel', book_path(book), class: 'inline-action' if book %>
   <%= form.button 'Save', class: 'inline-action' %>
 ```
 
-3. Schowaliśmy je... ale teraz "wszędzie" :) Więc musikmny je pokazać dla naszego inline edition
+3. Schowaliśmy je... ale teraz "wszędzie" :) Więc musimy je pokazać dla naszego inline edition
 W tym celu dodamy klasę `inline-show` do naszego frame'a, na widoku `app/views/books/show.html.erb`:
 ```ruby
 <%= turbo_frame_tag dom_id(@book, 'page_count'), class: 'inline-show' do %>
