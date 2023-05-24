@@ -155,7 +155,13 @@ Wyszukiwarka działać będzie na obecnej stronie, szukamy jak tylko użytkownik
 1. Zaczynamy od wygenerowania kontrolera js który będzie realizował funkcjonalność wysyłania zapytań, używamy do tego metody `bundle exec rails generate stimulus search`
 2. Pojawia się nam nowy plik `app/javascript/controllers/search_controller.js` zobaczmy jak on wygląda:
 ```
-# TODO
+import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="search"
+export default class extends Controller {
+  connect() {
+  }
+}
 ```
 
 3. Aby railsy wiedziały iż ten plik powinny załadować podczas działania serwera, musimy uaktualnić plik manifestu (plik z listą controllerów js), robimy to przez polecenie:
