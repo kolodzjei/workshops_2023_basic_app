@@ -21,6 +21,7 @@ class BookLoansController < ApplicationController
     respond_to do |format|
       if @book_loan.cancelled!
         remove_calendar_event
+        Publishers::LoanCancelPublisher.new(@book_loan.attributes).publish
         format.html { redirect_to book_requests_path, notice: flash_notice }
         format.json { render :show, status: :ok, location: book }
       end

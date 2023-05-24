@@ -23,6 +23,16 @@ class WeatherPresenter
 
   def weather_data
     @weather_data ||= WeatherApiConnector.new.weather_data
+
+    # {
+    #   'current' => {
+    #     'condition' => {
+    #       'text' => 'Sunny',
+    #       'icon' => 'http://cdn.weatherapi.com/weather/64x64/day/113.png'
+    #     },
+    #     'temp_c' => 20
+    #   }
+    # }
   end
 
   def nice_weather?
