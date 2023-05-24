@@ -8,8 +8,7 @@ export default class extends Controller {
     const value = this.paramsTarget.value
 
     fetch(`/books/search?search=${value}`, {
-      contentType: 'application/json',
-      hearders: 'application/json'
+      contentType: 'application/json'
     })
     .then((response) => response.text())
     .then(res => {

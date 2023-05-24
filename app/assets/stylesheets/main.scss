@@ -298,3 +298,11 @@ $light-red: #ffcccc;
     }
   }
 }
+
+.inline-action {
+  display: none;
+}
+
+.inline-show .inline-action {
+  display: inline-block;
+}
