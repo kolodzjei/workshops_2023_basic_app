@@ -102,3 +102,5 @@ gem 'sidekiq-cron', '~> 1.10'
 gem 'bunny', '~> 2.20'
 
 gem "hotwire-rails", "~> 0.1.3"
+
+gem "kaminari", "~> 1.2"

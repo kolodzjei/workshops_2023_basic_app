@@ -8,14 +8,14 @@
 user1 = ::User.find_or_initialize_by(email: 'user1@test.pl')
 user1.update(password: '123User!', password_confirmation: '123User!')
 
-user2 = ::User.find_or_initialize_by(email: 'user2@test.pl')
-user2.update(password: '123User!', password_confirmation: '123User!')
+user2 = ::User.find_or_initialize_by(email: 'user@example.com')
+user2.update(password: 'foobar', password_confirmation: 'foobar')
 
 10.times { Category.create(name: Faker::Book.genre) }
 10.times { Publisher.create(name: Faker::Book.publisher) }
 10.times { Author.create(name: Faker::Book.author.split(' ').first, surname: Faker::Book.author.split(' ').last) }
 
-10.times do
+40.times do
   Book.create(
     title: Faker::Book.title,
     isbn: Faker::Code.isbn,
