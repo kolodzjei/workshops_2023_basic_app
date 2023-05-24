@@ -53,6 +53,7 @@ gem 'devise'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'capybara'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
@@ -65,7 +66,9 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
+  gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.3'
+  gem 'webdrivers'
 end
 
 group :development do
@@ -82,9 +85,6 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
 end
 
 gem 'a9n'
@@ -101,6 +101,6 @@ gem 'sidekiq-cron', '~> 1.10'
 
 gem 'bunny', '~> 2.20'
 
-gem "hotwire-rails", "~> 0.1.3"
+gem 'hotwire-rails', '~> 0.1.3'
 
-gem "kaminari", "~> 1.2"
+gem 'kaminari', '~> 1.2'
