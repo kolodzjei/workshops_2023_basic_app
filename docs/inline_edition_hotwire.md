@@ -160,7 +160,7 @@ pierwsza klasa - schowa przyciski, druga - pokaże je, jeżeli na stronie jest k
 2. Dodajmy te klasy do naszych przycisków - cancel i save
 W `app/views/books/_form.html.erb`:
 ```ruby
-  <%= link_to 'Cancel', book_path(book), class: 'inline-action' if book %>
+  <%= link_to 'Cancel', book_path(book), class: 'inline-action' if book.persisted? %>
   <%= form.button 'Save', class: 'inline-action' %>
 ```
 
