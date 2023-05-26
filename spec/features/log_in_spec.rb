@@ -1,16 +1,19 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe "Log in", type: :feature do
+describe 'Log in', type: :feature do
   let(:user) { create(:user) }
 
   let(:weather_data) do
     {
+      'location' => {
+        'name' => 'Cracow'
+      },
       'current' => {
         'condition' => {
           'text' => 'Sunny',
           'icon' => 'http://cdn.weatherapi.com/weather/64x64/day/113.png'
         },
-        'temp_c' => 20
+        'temp_c' => 35
       }
     }
   end
@@ -49,5 +52,4 @@ describe "Log in", type: :feature do
       expect(page).to have_content('Signed in successfully.')
     end
   end
-
 end

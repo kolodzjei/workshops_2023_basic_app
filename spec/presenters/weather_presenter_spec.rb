@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe WeatherPresenter do
   let(:weather_data) do
     {
+      'location' => {
+        'name' => 'Cracow'
+      },
       'current' => {
         'condition' => {
           'text' => 'Sunny',
@@ -33,6 +36,12 @@ RSpec.describe WeatherPresenter do
   describe '#icon' do
     it 'returns weather icon' do
       expect(weather_presenter.icon).to eq('http://cdn.weatherapi.com/weather/64x64/day/113.png')
+    end
+  end
+
+  describe '#location' do
+    it 'returns weather location' do
+      expect(weather_presenter.location).to eq('Cracow')
     end
   end
 

@@ -3,3 +3,4 @@ defaults:
   google_client_id: '__your_client_id__'
   google_client_secret: '__your_client_secret__'
   app_host: 'http://localhost:3000'
+  ip_geolocation_api_key: '__your_geo_api_key__'
