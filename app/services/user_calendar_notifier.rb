@@ -12,14 +12,14 @@ class UserCalendarNotifier
     return unless user.token.present? && user.refresh_token.present?
 
     event = google_calendar_client.insert_event(CALENDAR_ID, event_data)
-    set_event_id_in_book_loan(event.id) if event.present?
+    update_book_loan_event_id(event.id) if event
   end
 
   private
 
   attr_reader :user, :book_loan
 
-  def set_event_id_in_book_loan(event_id)
+  def update_book_loan_event_id(event_id)
     book_loan.update(calendar_event_id: event_id)
   end
 
