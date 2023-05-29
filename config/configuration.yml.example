@@ -4,3 +4,8 @@ defaults:
   google_client_secret: '__your_client_secret__'
   app_host: 'http://localhost:3000'
   ip_geolocation_api_key: '__your_geo_api_key__'
+  rabbit_host: '__your_rabbit_host__'
+  rabbit_port: '__your_rabbit_port__'
+  rabbit_vhost: '__your_rabbit_vhost__'
+  rabbit_username: '__your_rabbit_username__'
+  rabbit_password: '__your_rabbit_password__'

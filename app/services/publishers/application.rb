@@ -22,11 +22,11 @@ module Publishers
 
     def connection_options
       {
-        host: 'localhost',
-        port: '5672',
-        vhost: '/',
-        username: 'guest',
-        password: 'guest'
+        host: A9n.rabbit_host,
+        port: A9n.rabbit_port,
+        vhost: A9n.rabbit_vhost,
+        username: A9n.rabbit_username,
+        password: A9n.rabbit_password
       }
     end
 
