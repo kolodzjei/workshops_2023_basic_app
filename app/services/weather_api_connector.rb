@@ -23,7 +23,8 @@ class WeatherApiConnector
     url = "https://api.ipgeolocation.io/ipgeo?apiKey=#{A9n.ip_geolocation_api_key}"
     uri = URI(url)
     response = Net::HTTP.get(uri)
-    JSON.parse(response)['city'] || 'Cracow'
+    city = JSON.parse(response)['city']
+    city.parameterize || 'Cracow'
   end
 
   def fallback_data

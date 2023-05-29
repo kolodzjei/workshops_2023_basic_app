@@ -46,10 +46,10 @@ class BookLoansController < ApplicationController
   end
 
   def notice_calendar
-    UserCalendarNotifier.new(current_user, @book_loan).insert_event
+    GoogleCalendar::UserNotifier.new(current_user, @book_loan).insert_event
   end
 
   def remove_calendar_event
-    CalendarEventRemover.new(current_user, @book_loan.calendar_event_id).remove_event
+    GoogleCalendar::EventRemover.new(current_user, @book_loan.calendar_event_id).remove_event
   end
 end
